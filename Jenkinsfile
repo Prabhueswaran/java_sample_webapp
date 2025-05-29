@@ -16,9 +16,10 @@ pipeline {
         }
         
         stage('SonarQube Analysis') {
-          def mvn = tool 'Default Maven';
-          withSonarQubeEnv() {
-            sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=java_sample_webapp"
+            steps {
+                withSonarQubeEnv("${SONARQUBE}") {
+                    sh 'mvn sonar:sonar -Dsonar.projectKey=sample-webapp -Dsonar.host.url=http://sonarqube:9000 -Dsonar.login=${SONAR_AUTH_TOKEN}'
+                }
             }
         } 
 

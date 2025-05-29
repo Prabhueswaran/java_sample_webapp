@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         MAVEN_HOME = tool name: 'maven_3.9.7', type: 'maven'
+        SONARQUBE = 'sonarqube' // Name defined in Jenkins system config
         PATH = "${MAVEN_HOME}/bin:${env.PATH}"
     }
 
@@ -13,6 +14,13 @@ pipeline {
                 checkout scm
             }
         }
+        
+        stage('SonarQube Analysis') {
+          def mvn = tool 'Default Maven';
+          withSonarQubeEnv() {
+            sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=java_sample_webapp"
+            }
+        } 
 
         stage('Build') {
             steps {

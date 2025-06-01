@@ -52,7 +52,7 @@ pipeline {
             sh 'mvn deploy -s settings.xml'
                 }
             }
-        
+        }
 
         stage('Archive WAR') {
             steps {

@@ -9,6 +9,6 @@ public class HelloServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         resp.setContentType("text/html");
-        resp.getWriter().write("<h1>Hello from DevOps Team!</h1>");
+        resp.getWriter().write("<h1>Jenkins pipeline test from DevOps Team!</h1>");
     }
 }
